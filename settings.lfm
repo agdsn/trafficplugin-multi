@@ -1,0 +1,10 @@
+object Form2: TForm2
+  Left = 689
+  Height = 480
+  Top = 305
+  Width = 640
+  BorderStyle = bsDialog
+  Caption = 'Einstellungen'
+  Position = poScreenCenter
+  LCLVersion = '1.2.0.2'
+end
