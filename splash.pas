@@ -1,7 +1,7 @@
 unit splash;
 
 {$mode objfpc}{$H+}
-{$DEFINE debug}
+// {$DEFINE debug}
 
 interface
 
@@ -144,6 +144,7 @@ begin
   statuslabel.caption := msg;
   statuslabel.Font.Color := clred;
   status := tsError;
+  tray.Hint := msg;
   UpdateIcon;
   Refresh;
 end;
@@ -154,6 +155,7 @@ begin
   statuslabel.font.color := clblack;
   status := tsOK;
   tray.Hint := msg;
+  UpdateIcon;
   Refresh;
 end;
 
