@@ -1019,6 +1019,7 @@ object Splashform: TSplashform
     BalloonFlags = bfInfo
     PopUpMenu = traypop
     Hint = 'AGDSN'
+    OnPaint = trayPaint
     left = 664
     top = 224
   end
