@@ -4,7 +4,7 @@ AGDSN TTraf Application
 Platform independent traffic report app for use within the agdsn network.
 Provides an easy way to stay updated regarding your current traffic status.
 
-** This is an experimental application. It is not finished. **
+__This is an experimental application. It is not finished.__
 
 Features
 ------------
