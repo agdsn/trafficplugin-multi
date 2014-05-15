@@ -4,11 +4,13 @@ AGDSN TTraf Application
 Platform independent traffic report app for use within the agdsn network.
 Provides an easy way to stay updated regarding your current traffic status.
 
+** This is an experimental application. It is not finished. **
+
 Features
 ------------
 - Displays traffic usage in system tray (usually located next to the system clock)
 - Issues a warning on high traffic usage
-- ToDo: locales (english / german)
+- ToDo: locales (english / german), currently german only
 
 System compatibility
 ------------
