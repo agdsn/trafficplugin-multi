@@ -3,3 +3,6 @@ backup/
 ttraf.exe
 lib/
 ttraf.lps
+*.lock
+logogen/packages
+logogen/bin/packages
