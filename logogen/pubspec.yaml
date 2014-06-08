@@ -1,0 +1,6 @@
+name: logogen
+version: 1.0.0
+author: Tim Kluge
+description: Generates icons showing a status bar
+dependencies:
+  image: any
