@@ -1,13 +1,13 @@
 unit splash;
 
 {$mode objfpc}{$H+}
-{$DEFINE debug}
+//{$DEFINE debug}
 
 interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, Menus, lNetComponents, lhttp, lNet, LCLIntf;
+  StdCtrls, Menus, lhttp, lNet, LCLIntf;
 
 const
   UsedApiVersion = 1;
@@ -29,7 +29,6 @@ type
     traypop: TPopupMenu;
     statuslabel: TLabel;
     requesttimer: TTimer;
-    trafget: TLHTTPClientComponent;
     backgroundshape: TShape;
     minimizetimer: TTimer;
     tray: TTrayIcon;
@@ -48,6 +47,7 @@ type
     HTTPBuffer: string;
     lastPercentValue: single;
     status: TTrafficStatus;
+    trafget: TLHTTPClient;
 
     procedure reportError(msg: string);
     procedure reportMessage(msg: string);
@@ -78,10 +78,17 @@ begin
   tray.Show;
   reportMessage('Trafficinformation wird abgefragt...');
 
+  trafget := TLHTTPClient.Create(self);
   {$IFDEF debug}
   trafget.Host := 'localhost';
   trafget.Port := 8080;
+  {$ELSE}
+  trafget.Host := 'wwww.wh2.tu-dresden.de';
+  trafget.URI :=  'http://www.wh2.tu-dresden.de/traffic/getMyTraffic.php';
   {$ENDIF}
+  trafget.OnDoneInput := @trafgetDoneInput;
+  trafget.OnError := @trafgetError;
+  trafget.OnInput := @trafgetInput;
 end;
 
 procedure TSplashform.FormShow(Sender: TObject);
@@ -181,7 +188,7 @@ begin
       Exit;
     end;
 
-    if (percent > 40) and (lastPercentValue <= 40) then
+    if (percent > 80) and (lastPercentValue <= percent - 10) then
     begin
       tray.BalloonFlags := bfWarning;
       tray.BalloonTitle := 'Hoher Trafficverbrauch';
@@ -189,9 +196,9 @@ begin
         ' % Traffic verbraucht. Achtung: Bei 100 % wirst du gesperrt!';
       tray.BalloonTimeout := 10000;
       tray.ShowBalloonHint;
+      lastPercentValue := percent;
     end;
 
-    lastPercentValue := percent;
     reportMessage('Traffic zu ' + FormatFloat('##0.##', percent) + ' % aufgebraucht.');
 
     ImageList1.GetIcon(1 + round(percent / 5), tray.Icon);

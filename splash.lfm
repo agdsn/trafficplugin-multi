@@ -1030,16 +1030,6 @@ object Splashform: TSplashform
     left = 631
     top = 223
   end
-  object trafget: TLHTTPClientComponent
-    Host = 'www.wh2.tu-dresden.de'
-    URI = 'http://www.wh2.tu-dresden.de/traffic/getMyTraffic.php'
-    OnDoneInput = trafgetDoneInput
-    OnInput = trafgetInput
-    OnError = trafgetError
-    Timeout = 0
-    left = 592
-    top = 223
-  end
   object requesttimer: TTimer
     Interval = 30000
     OnTimer = requesttimerTimer
